@@ -8,6 +8,24 @@ const assoc = (o, k, v) => {
     return no;
 };
 
+const groupBy = (f, arr) => {
+    if ( typeof f !== 'function' )
+        throw 'Input [first] must be function';
+
+    if ( ! Array.isArray(arr) )
+        throw 'Input [second] must be Array';
+
+    return arr.reduce(
+        (acc, a) => {
+            const k = f(a);
+            const cv = acc[k];
+            const nv = cv === undefined ? [a] : cv.concat([a]);
+            return assoc(acc, k, nv);
+        }, {}
+    );
+    
+};
+
 const all = () => [p3].reduce(
     (acc, { f, inputExpectedPairs, name }) => {
         const rs = inputExpectedPairs
@@ -17,5 +35,17 @@ const all = () => [p3].reduce(
     }, []
 );
 
+const testsAll = () => {
+    console.log(
+        groupBy((r) => r.name, all())
+    );
+};
 
-module.exports = { all };
+const testsFailing = () => {
+    const fts = all().filter((r) => ! r.result );
+    console.log(
+        groupBy((r) => r.name, fts)
+    );
+};
+
+module.exports = { all, testsAll, testsFailing };
