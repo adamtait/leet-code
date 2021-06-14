@@ -12,9 +12,9 @@ var twoSum = (nums, target) => {
 // testing
 
 const inputExpectedPairs = [
-    [[2,2], 4],
-    [[11,15,2,7], 9],
-    [[2,11,15,7],9]
+    [[[2,2], 4], [0,1]],
+    [[[11,15,2,7], 9], [2,3]],
+    [[[2,11,15,7],9], [0,3]]
 ];
 
 module.exports = {

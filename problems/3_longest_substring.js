@@ -1,4 +1,9 @@
 /**
+ * Given a string s, find the length of the longest substring without
+ * repeating characters.
+ */
+
+/**
  * @param {string} s
  * @return {number}
  */
@@ -38,14 +43,14 @@ const lengthOfLongestSubstring = (s) => {
 // testing
 
 const inputExpectedPairs = [
-    ['', 0],
-    ['abc', 3],
-    ['abbc', 2],
-    ['abcabcbb', 3],
-    ['bbbbb', 1],
-    ['pwwkew', 3],
-    ['dvdf', 3],
-    ['asjrgapa', 6]
+    [[''], 0],
+    [['abc'], 3],
+    [['abbc'], 2],
+    [['abcabcbb'], 3],
+    [['bbbbb'], 1],
+    [['pwwkew'], 3],
+    [['dvdf'], 3],
+    [['asjrgapa'], 6]
 ];
 
 module.exports = {

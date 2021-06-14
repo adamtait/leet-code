@@ -21,7 +21,7 @@ const areEqual = (a,b) => {
 };
 
 const test = (f, [input, expected]) => {
-    const actual = f.apply(null, [input]);
+    const actual = f.apply(null, input);
     const result = areEqual(actual, expected);
     return { actual, expected, input, result };
 };
