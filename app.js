@@ -41,11 +41,11 @@ const testsAll = () => {
     );
 };
 
-const testsFailing = () => {
+const testsFailed = () => {
     const fts = all().filter((r) => ! r.result );
     console.log(
         groupBy((r) => r.name, fts)
     );
 };
 
-module.exports = { all, testsAll, testsFailing };
+module.exports = { all, testsAll, testsFailed };
