@@ -1,6 +1,13 @@
 const { test } = require('./test');
-
+const p1 = require('./problems/1_two_sum');
+//const p2 = require('./problems/2_add_two_numbers');
 const p3 = require('./problems/3_longest_substring');
+
+const problems = [p1, p3];
+
+
+//
+// helpers
 
 const assoc = (o, k, v) => {
     var no = Object.assign({}, o);
@@ -26,7 +33,12 @@ const groupBy = (f, arr) => {
     
 };
 
-const all = () => [p3].reduce(
+
+
+//
+// test
+
+const all = () => problems.reduce(
     (acc, { f, inputExpectedPairs, name }) => {
         const rs = inputExpectedPairs
               .reduce((results, pair) => results.concat([test(f, pair)]), [])
