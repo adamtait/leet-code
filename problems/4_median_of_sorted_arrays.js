@@ -46,19 +46,26 @@ const indexOfN = (nums, n) => {
 const findMedianSortedArrays = (nums1, nums2) => {
     // assumes that nums1 & nums2 are already sorted
     
-    //if ( last(nums1) < first(nums2) ) {
-    //    if ( nums1.length === nums2.length )
-    //        return median([last(nums1), first(nums2)]);
-    //}
-    //if ( last(nums2) < first(nums1) ) {
-    //    if ( nums1.length === nums2.length )
-    //        return median([last(nums2), first(nums1)]);
-    //}
+    if ( last(nums1) < first(nums2) ) {
+        if ( nums1.length === nums2.length )
+            return median([last(nums1), first(nums2)]);
+        if ( nums1.length > nums2.length ) return last(nums1);
+        return first(nums2);
+    }
+
+    if ( last(nums2) < first(nums1) ) {
+        if ( nums1.length === nums2.length )
+            return median([last(nums2), first(nums1)]);
+        if ( nums2.length > nums1.length ) return last(nums2);
+        return first(nums1);
+    }
 
     // else => overlap
-    // binary search to remove non-overlapping slices
-
-
+    
+    const middle1 = middle(nums1);
+    const middle2 = middle(nums2);
+    
+    
 
     
 };
