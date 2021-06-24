@@ -3,6 +3,8 @@
  * respectively, return the median of the two sorted arrays.
  *
  * The overall run time complexity should be O(log (m+n)).
+ *
+ * notes: https://mem.ai/m/JE9LNcv67DT2Jt8uiHyT
  */
 
 const first = (nums) => nums[0];
@@ -13,45 +15,52 @@ const median = (nums) => {
     return sum / nums.length;
 };
 
+const point = (nums, index) => {
+    return {
+        index: index,
+        value: nums[index]
+    };
+};
+
 const middle = (nums) => {
     const hl = nums.length / 2;
     if ( nums.length % 2 === 0 )
-        return [ nums[ hl - 1 ], nums[ hl ] ];
-    return [nums[ Math.floor(hl) ]];
+        return [ point(nums, hl-1), point(nums, hl) ];
+    return [ point(nums, Math.floor(hl)) ];
 };
 
-const indexOfN = (nums, n) => {
-
-    if ( nums.length === 0 ) return 0;
-    if ( nums.length === 1 ) {
-        if ( nums[0] < n ) return 1;
-        return 0;
-    }
-        
-    const mns = middle(nums);
-    if ( n < first(mns) ) {
-        const i = Math.floor(nums.length / 2);
-        return indexOfN( nums.slice(0, i), n);
-    }
-    if ( n > last(mns) ) {
-        // TODO reverse translation of indexes
-        const i = Math.ceil(nums.length / 2);
-        const r = indexOfN( nums.slice(i), n);
-        return r + i;
-    }
-    return Math.floor(nums.length / 2);
+const triplets = (nums) => {
+    if ( nums.length === 0 ) return [];
+    if ( nums.length === 1 ) return [ point(nums,0) ];
+    if ( nums.length === 2 ) return [ point(nums,0), point(nums,1) ];
+    const hl = Math.floor(nums.length / 3);
+    return [ point(nums, hl), point(nums, nums.length - hl) ];
 };
 
+
+const sort = (n1, n2, low, high) => {
+    
+    return [];
+};
 
 const findMedianSortedArrays = (nums1, nums2) => {
     // assumes that nums1 & nums2 are already sorted
-    
-    if ( last(nums1) < first(nums2) ) {
-        if ( nums1.length === nums2.length )
-            return median([last(nums1), first(nums2)]);
-        if ( nums1.length > nums2.length ) return last(nums1);
-        return first(nums2);
-    }
+
+    console.log("----");
+    console.log(nums1);
+    console.log(nums2);
+
+    if ( nums1.length === 0 ) return median(nums2);
+    if ( nums2.length === 0 ) return median(nums1);
+
+    // if nums1 is strictly smaller than nums2
+    if ( last(nums1) < first(nums2) )
+        median(middle( nums1.concat(nums2) ));
+
+    // if nums2 is strictly smaller than nums1
+    if ( last(nums2) < first(nums1) )
+        median(middle( nums2.concat(nums1) ));
+
 
     if ( last(nums2) < first(nums1) ) {
         if ( nums1.length === nums2.length )
@@ -60,15 +69,34 @@ const findMedianSortedArrays = (nums1, nums2) => {
         return first(nums1);
     }
 
-    // else => overlap
     
-    const middle1 = middle(nums1);
-    const middle2 = middle(nums2);
-    
-    
-
     
 };
+
+
+// [1,2,3], [1]
+// [1,1,2,3]
+// = 1.5
+
+// [1,2,3,4], [3,4,5,6]
+// [1,2,3,3,4,4,5,6]
+// = 3.5
+
+// [1,2,5,6], [3,3,4,4]
+// [1,2,3,3,4,4,5,6]
+// = 3.5
+
+// [3,3,4,4], [1,2,5,6]
+// [1,2,3,3,4,4,5,6]
+// = 3.5
+
+// [1,2,3], [8,9,10]
+// [1,2,3,8,9,10]
+// = 5.5
+
+// [1,3,5,7,9], [0,2,4,6,8]
+// [0,1,2,3,4,5,6,7,8,9]
+// = 5
 
 
 //
@@ -83,11 +111,11 @@ const inputExpectedPairs = [
     [[[8,9,10],[1,2,3]], 5.5],
     [[[1,2,3],[8,9,10]], 5.5],
     [[[1],[1]], 1],
-    [[[1,3,5,7,9],[0,2,4,6,8]], 5]  // this case would be O(m+n)
+    [[[1,3,5,7,9],[0,2,4,6,8]], 5]
 ];
 
 module.exports = {
     f: twoSum,
     inputExpectedPairs,
-    name: '1 - two sum'
+    name: '4 - median of sorted arrays'
 };
