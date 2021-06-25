@@ -29,19 +29,27 @@ const middle = (nums) => {
     return [ point(nums, Math.floor(hl)) ];
 };
 
-const triplets = (nums) => {
-    if ( nums.length === 0 ) return [];
-    if ( nums.length === 1 ) return [ point(nums,0) ];
-    if ( nums.length === 2 ) return [ point(nums,0), point(nums,1) ];
-    const hl = Math.floor(nums.length / 3);
-    return [ point(nums, hl), point(nums, nums.length - hl) ];
+const firstIndexLessThan = (nums, n) => {
+
+    if ( nums.length === 0 ) return 0;
+    if ( nums.length === 1 ) {
+        if ( nums[0] < n ) return 1;
+        return 0;
+    }
+
+    const mns = middle(nums);
+    if ( n < first(mns).value ) {
+        const i = Math.floor(nums.length / 2);
+        return firstIndexLessThan( nums.slice(0, i), n );
+    }
+    if ( n > last(mns).value ) {
+        const i = Math.ceil(nums.length / 2);
+        const r = firstIndexLessThan( nums.slice(i), n );
+        return r + i;
+    }
+    return Math.floor(nums.length / 2);
 };
 
-
-const sort = (n1, n2, low, high) => {
-    
-    return [];
-};
 
 const findMedianSortedArrays = (nums1, nums2) => {
     // assumes that nums1 & nums2 are already sorted
@@ -50,6 +58,7 @@ const findMedianSortedArrays = (nums1, nums2) => {
     console.log(nums1);
     console.log(nums2);
 
+    // optimizations 
     if ( nums1.length === 0 ) return median(nums2);
     if ( nums2.length === 0 ) return median(nums1);
 
@@ -62,13 +71,15 @@ const findMedianSortedArrays = (nums1, nums2) => {
         median(middle( nums2.concat(nums1) ));
 
 
-    if ( last(nums2) < first(nums1) ) {
-        if ( nums1.length === nums2.length )
-            return median([last(nums2), first(nums1)]);
-        if ( nums2.length > nums1.length ) return last(nums2);
-        return first(nums1);
-    }
+    // recursive
+    
+    // [0,1,2,3,4,5,6,7,8,9,10]
+    //         [4,5,6]
 
+    const m1 = middle(nums1);
+    const m2 = middle(nums2);
+    
+    
     
     
 };
@@ -77,6 +88,10 @@ const findMedianSortedArrays = (nums1, nums2) => {
 // [1,2,3], [1]
 // [1,1,2,3]
 // = 1.5
+
+// [1,2,3,4,4], [1]
+// [1,1,2,3,4,4]
+// = 2.5
 
 // [1,2,3,4], [3,4,5,6]
 // [1,2,3,3,4,4,5,6]
@@ -96,7 +111,7 @@ const findMedianSortedArrays = (nums1, nums2) => {
 
 // [1,3,5,7,9], [0,2,4,6,8]
 // [0,1,2,3,4,5,6,7,8,9]
-// = 5
+// = 4.5
 
 
 //
