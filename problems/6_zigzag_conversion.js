@@ -32,6 +32,29 @@
  * @param {number} numRows
  * @return {string}
  */
-var convert = function(s, numRows) {
-    
+
+var convert = function (s, numRows) {
+
+    // come up with a mathematical way (based on [numRows] to predict
+    // what the character for each index in the result should be
+
+    var result = '';
+    for (var i = 0; i < s.length; i++) {
+        
+    }
+    return result;
+};
+
+
+const inputExpectedPairs = [
+    [['', 3], ''],
+    [['PAYPALISHIRING', 3], 'PAHNAPLSIIGYIR'],
+    [['PAYPALISHIRING', 4], 'PINALSIGYAHRPI']
+];
+
+
+module.exports = {
+    f: convert,
+    inputExpectedPairs,
+    name: '6 - zigzag conversion'
 };
