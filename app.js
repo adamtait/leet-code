@@ -2,8 +2,9 @@ const { test } = require('./test');
 const p1 = require('./problems/1_two_sum');
 //const p2 = require('./problems/2_add_two_numbers');
 const p3 = require('./problems/3_longest_substring');
+const p5 = require('./problems/5_longest_palindromic_string');
 
-const problems = [p1, p3];
+const problems = [p1, p3, p5];
 
 
 //
