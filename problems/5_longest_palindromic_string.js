@@ -7,29 +7,11 @@
  * @return {string}
  */
 
-const longestPalindromeAt = function (s, i) {
-    
-    // what happens if it's a palindrome with a pair in the middle?
-    // special check for that
-
-    var il = i;
-    var ir = i;
-    
-    var til = i - 1;
-    var tir = i + 1;
-    if ( til >= 0 || tir < s.length ) {
-        var l = s[til]; var r = s[tir];
-        if ( l !== r ) { // not same on both sides
-            // pair to the left
-            if ( l === s[i] ) il = til;
-            // pair to the right
-            else if ( r === s[i] ) ir = tir;
-        }
-    }
+const longestPalindromeFrom = function (s, il, ir) {
 
     const minr = s.length - ir - 1;
     const dist = Math.min(il, minr < 0 ? 0 : minr);
-    var c = il === ir ? s[i] : s[il] + s[ir];
+    var c = il === ir ? s[il] : s[il] + s[ir];
 
     for (var j = 1; j <= dist; j++)
     {
@@ -41,6 +23,23 @@ const longestPalindromeAt = function (s, i) {
         c = s[l] + c + s[r]; // still a palindrome => continue
     }
     return c;
+}
+
+const longestPalindromeAt = function (s, i) {
+    
+    // what happens if it's a palindrome with a pair in the middle?
+    // special check for that
+
+    const cm = longestPalindromeFrom(s, i, i);
+    
+    var til = i - 1;
+    if ( til >= 0 && s[til] === s[i] ) {
+        // pair to the left
+        const ccm = longestPalindromeFrom(s, til, i);
+        return ccm.length > cm.length ? ccm : cm;
+    }
+    // else
+    return cm;
 }
 
 var longestPalindrome = function (s) {
@@ -59,6 +58,8 @@ const inputExpectedPairs = [
     [['cbbd'], 'bb'],
     [['a'], 'a'],
     [['ac'], 'a'],
+    [['ccc'], 'ccc'],
+    [['aaaa'], 'aaaa'],
     [['acadefgfedeeee'], 'defgfed']
 ];
 
