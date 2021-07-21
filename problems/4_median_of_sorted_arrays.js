@@ -15,73 +15,24 @@ const median = (nums) => {
     return sum / nums.length;
 };
 
-const point = (nums, index) => {
-    return {
-        index: index,
-        value: nums[index]
-    };
+
+const nthSmallestNumber = (n, nums1, nums2, [i1, i2]) => {
+    if (i1 > nums1.length) return 
+
 };
-
-const middle = (nums) => {
-    const hl = nums.length / 2;
-    if ( nums.length % 2 === 0 )
-        return [ point(nums, hl-1), point(nums, hl) ];
-    return [ point(nums, Math.floor(hl)) ];
-};
-
-const firstIndexLessThan = (nums, n) => {
-
-    if ( nums.length === 0 ) return 0;
-    if ( nums.length === 1 ) {
-        if ( nums[0] < n ) return 1;
-        return 0;
-    }
-
-    const mns = middle(nums);
-    if ( n < first(mns).value ) {
-        const i = Math.floor(nums.length / 2);
-        return firstIndexLessThan( nums.slice(0, i), n );
-    }
-    if ( n > last(mns).value ) {
-        const i = Math.ceil(nums.length / 2);
-        const r = firstIndexLessThan( nums.slice(i), n );
-        return r + i;
-    }
-    return Math.floor(nums.length / 2);
-};
-
 
 const findMedianSortedArrays = (nums1, nums2) => {
     // assumes that nums1 & nums2 are already sorted
 
-    console.log("----");
-    console.log(nums1);
-    console.log(nums2);
+    if (nums1.length > nums2.length)
+        return findMedianSortedArrays(nums2, nums1);
 
-    // optimizations 
-    if ( nums1.length === 0 ) return median(nums2);
-    if ( nums2.length === 0 ) return median(nums1);
-
-    // if nums1 is strictly smaller than nums2
-    if ( last(nums1) < first(nums2) )
-        median(middle( nums1.concat(nums2) ));
-
-    // if nums2 is strictly smaller than nums1
-    if ( last(nums2) < first(nums1) )
-        median(middle( nums2.concat(nums1) ));
-
-
-    // recursive
-    
-    // [0,1,2,3,4,5,6,7,8,9,10]
-    //         [4,5,6]
-
-    const m1 = middle(nums1);
-    const m2 = middle(nums2);
-    
-    
-    
-    
+    const totalLength = nums1.length + nums2.length;
+    if ( totalLength % 2 === 0 )
+        return ( nthSmallestNumber(totalLength / 2, nums1, nums2, [0,0])
+                 + nthSmallestNumber((totalLength / 2) + 1, nums1, nums2, [0,0])
+               ) / 2;
+    return nthSmallestNumber(Math.ceil(totalLength / 2), nums1, nums2, [0,0])
 };
 
 
