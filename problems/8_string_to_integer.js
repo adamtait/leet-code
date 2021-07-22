@@ -56,6 +56,7 @@ var myAtoi = function (s) {
         }
     }
     if (ni < 0 || ni > 1) return 0;
+    if (ni === 1 && s.charCodeAt(0) !== 45) return 0;
 
     var result = 0;
     for (var i = ni; i < ss.length; i++) {
@@ -76,6 +77,7 @@ const inputExpectedPairs = [
     [['a'], 0],
     [['-'], 0],
     [['-1'], -1],
+    [['.1'], 0],
     [['42'], 42],
     [['-42'], -42],
     [['     -42'], -42],
