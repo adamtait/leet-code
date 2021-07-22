@@ -33,6 +33,10 @@
  * @return {string}
  */
 
+const nextRow = (i, r, max) => {
+    if ( max <= 1 ) return 0;
+    return Math.floor( i / (max - 1) ) % 2 === 0 ? r + 1 : r - 1;
+};
 
 var convert = function (s, numRows) {
     var rows = [];
@@ -40,8 +44,7 @@ var convert = function (s, numRows) {
     for (var i = 0; i < s.length; i++) {
         if ( rows[curRow] === undefined ) rows[curRow] = [];
         rows[curRow].push(s[i]);
-        console.log(s[i] + ' ' + curRow);
-        curRow = Math.floor( i / (numRows-1) ) % 2 === 0 ? curRow + 1 : curRow - 1;
+        curRow = nextRow(i, curRow, numRows);
     }
     return rows.map((cs) => cs.join('')).join('');
 };
@@ -49,6 +52,7 @@ var convert = function (s, numRows) {
 
 const inputExpectedPairs = [
     [['', 3], ''],
+    [['AB', 1], 'AB'],
     [['PAYPALISHIRING', 3], 'PAHNAPLSIIGYIR'], // 4 [0,4,8,12, 1,3,5,7,9,11,13, 2,6,10]
     [['PAYPALISHIRING', 4], 'PINALSIGYAHRPI']  // 6 [0,6,12,   1,5,7,11,13,     2,4,8,10,  3,9]
 ];
