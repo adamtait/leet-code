@@ -14,13 +14,18 @@
  */
 
 var reverse = function (x) {
+
     var result = 0;
     var rem = Math.abs(x);
     while ( rem / 10 > 0 ) {
         result = (result + rem % 10) * 10;
         rem = Math.floor(rem / 10);
     }
-    return x < 0 ? (result / 10) * -1 : (result / 10);
+    
+    result = result / 10;
+    if ( x < 0 ) result = result * -1;
+    if ( result > 2147483647 || result < -2147483648 ) return 0;
+    return result;
 };
 
 
@@ -31,6 +36,11 @@ const inputExpectedPairs = [
     [[120], 21],
     [[1200], 21],
     [[12001], 10021],
+    [[1534236469], 0],
+    [[7463847412], 2147483647],
+    [[8463847412], 0],
+    [[-8463847412], -2147483648],
+    [[-9463847412], 0],
 ];
 
 
