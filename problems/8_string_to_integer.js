@@ -46,14 +46,16 @@ const charCodeIsNumber = (cc) => {
 
 var myAtoi = function (s) {
 
+    var ss = s.trimStart();
+    
     // find index of first number
     var ni = -1;
-    for (var i = 0; i < s.length; i++) {
+    for (var i = 0; i < 3; i++) {
         if ( charCodeIsNumber(s.charCodeAt(i)) ) {
             ni = i; break;
         }
     }
-    if (ni < 0) return 0;
+    if (ni < 0 || ni > 1) return 0;
 
     var result = 0;
     for (var i = ni; i < s.length; i++) {
@@ -77,11 +79,11 @@ const inputExpectedPairs = [
     [['42'], 42],
     [['-42'], -42],
     [['4193 with words'], 4193],
-    [['words and 987'], 987],
+    [['words and 987'], 0],
     [['101 words and 987'], 101],
-    [['over 91283472332 bounds'], 2147483647],
+    [['91283472332 over bounds'], 2147483647],
     [['2147483647 at bounds'], 2147483647],
-    [['over -91283472332 bounds'], -2147483648],
+    [['-91283472332 over bounds'], -2147483648],
     [['-2147483648 at bounds'], -2147483648]
 ];
 
