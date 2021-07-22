@@ -51,20 +51,20 @@ var myAtoi = function (s) {
     // find index of first number
     var ni = -1;
     for (var i = 0; i < 3; i++) {
-        if ( charCodeIsNumber(s.charCodeAt(i)) ) {
+        if ( charCodeIsNumber(ss.charCodeAt(i)) ) {
             ni = i; break;
         }
     }
     if (ni < 0 || ni > 1) return 0;
 
     var result = 0;
-    for (var i = ni; i < s.length; i++) {
-        var cc = s.charCodeAt(i);
+    for (var i = ni; i < ss.length; i++) {
+        var cc = ss.charCodeAt(i);
         if ( ! charCodeIsNumber(cc) ) break;
         result = (result + (cc - 48)) * 10;
     }
     result = result / 10;
-    var neg = s.charCodeAt(ni-1) === 45;
+    var neg = ni === 1 && ss.charCodeAt(0) === 45;
     if (neg) result = result * -1;
     if ( result > 2147483647 ) return 2147483647;
     if ( result < -2147483648 ) return -2147483648;
@@ -78,6 +78,7 @@ const inputExpectedPairs = [
     [['-1'], -1],
     [['42'], 42],
     [['-42'], -42],
+    [['     -42'], -42],
     [['4193 with words'], 4193],
     [['words and 987'], 0],
     [['101 words and 987'], 101],
