@@ -33,23 +33,24 @@
  * @return {string}
  */
 
+
 var convert = function (s, numRows) {
-
-    // come up with a mathematical way (based on [numRows] to predict
-    // what the character for each index in the result should be
-
-    var result = '';
+    var rows = [];
+    var curRow = 0;
     for (var i = 0; i < s.length; i++) {
-        
+        if ( rows[curRow] === undefined ) rows[curRow] = [];
+        rows[curRow].push(s[i]);
+        console.log(s[i] + ' ' + curRow);
+        curRow = Math.floor( i / (numRows-1) ) % 2 === 0 ? curRow + 1 : curRow - 1;
     }
-    return result;
+    return rows.map((cs) => cs.join('')).join('');
 };
 
 
 const inputExpectedPairs = [
     [['', 3], ''],
-    [['PAYPALISHIRING', 3], 'PAHNAPLSIIGYIR'],
-    [['PAYPALISHIRING', 4], 'PINALSIGYAHRPI']
+    [['PAYPALISHIRING', 3], 'PAHNAPLSIIGYIR'], // 4 [0,4,8,12, 1,3,5,7,9,11,13, 2,6,10]
+    [['PAYPALISHIRING', 4], 'PINALSIGYAHRPI']  // 6 [0,6,12,   1,5,7,11,13,     2,4,8,10,  3,9]
 ];
 
 
