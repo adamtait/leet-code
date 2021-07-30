@@ -112,3 +112,9 @@ module.exports = {
     inputExpectedPairs,
     name: '10 - regular expression matching'
 };
+
+
+/**
+ * helpful links
+ * + https://algorithmsinsight.wordpress.com/problems/leetcode/regular-expression-matching/
+ */
