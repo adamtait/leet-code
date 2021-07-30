@@ -6,8 +6,9 @@ const p5 = require('./problems/5_longest_palindromic_string');
 const p6 = require('./problems/6_zigzag_conversion');
 const p7 = require('./problems/7_reverse_integer');
 const p8 = require('./problems/8_string_to_integer');
+const pt = require('./problems/permissions_tree');
 
-const problems = [p1, p3, p5, p6, p7, p8];
+const problems = [p1, p3, p5, p6, p7, p8, pt];
 
 
 //
