@@ -9,19 +9,39 @@
  * Notice that you may not slant the container.
  */
 
+const recur = (hs, low, high) => {
+
+    const ha = hs[low];
+    const hb = hs[high];
+    const m = Math.min(ha, hb);
+    const nm = m * (high - low);
+
+    // for there to be a new max in between [low, high], there would
+    // have to be 2 values that were both greater than the
+    // min(hs[low], hs[high]). If we can find those values, then we
+    // can jump straight there. Otherwise, this is the global max.
+
+    // hold one end fixed and only move the other
+
+    var i = 0;
+    const bottom = ha <= hb;
+    while( i < high - low )
+    {
+        i = i + 1;
+        const hi = hs[low+i]; const hj = hs[high-i];
+        if (bottom && hi > ha) break;
+        if (hj > hb) break;
+    }
+
+    if ( (bottom && hs[low+i] > ha) || (hs[high-i] > hb) ) {
+        const sm = bottom ? recur(hs, low+i, high) : recur(hs, low, high-i);
+        return Math.max(nm, sm);
+    }
+    return nm;
+};
 
 var maxArea = function (heights) {
-    var max = 0;
-    for ( const i in heights ) {
-        const ha = heights[i];
-        for ( var j = i; j < heights.length; j++ ) {
-            const hb = heights[j];
-            const m = Math.min(ha, hb);
-            const nm = m * (j - i);
-            if (nm > max) max = nm;
-        }
-    }
-    return max;
+    return recur(heights, 0, heights.length - 1);
 };
 
 const inputExpectedPairs = [
