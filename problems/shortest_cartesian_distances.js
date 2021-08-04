@@ -26,34 +26,33 @@
  * originally given this problem.
  */
 
+
+
+const floydWarshall = () => {
+    
+};
+
+
+//
+// dynamic
+
 const eds = [
     [[0,0], [ [[1,1], 2], [[2,2], 4] ]],
     [[1,0], [ [[1,1], 1], [[2,2], 3] ]],
 ];
 
-var shortestPath = (m, ac, bc) => {
+var shortestPath = (g, ac, bc) => {
     return Math.abs( bc[0] - ac[0] ) + Math.abs( bc[1] - ac[1] );
 };
 
-var shortestCartesianDistances = function (rows) {
+const dynamic = function (graph, as, bs) {
 
     var ds = [];
-    var map = [];
-    var as = [];
-    var bs = [];
-    for (var rn = 0; rn < rows.length; rn++) {
-        const cols = cols.split();
-        map.push(cols);
-        for (var cn = 0; cn < cols.length; cn++) {
-            if (cols[cn] === 'a') as.push([rn,cn]);
-            if (cols[cn] === 'b') bs.push([rn,cn]);
-        }
-    }
 
     for (var an = 0; an < as.length; an++) {
         var apaths = [];
         for (var bn = 0; bn < bn.length; bn++) {
-            const sps = shortestPath(map, as[an], bs[bn]);
+            const sps = shortestPath(graph, as[an], bs[bn]);
             apaths.push([bs[bn], sps]);
         }
         ds.push([as[an], apaths]);
@@ -64,6 +63,29 @@ var shortestCartesianDistances = function (rows) {
     //for (var )
     // need to compute global shortests paths sums for all combinations of a's & b's
 
+    
+};
+
+
+//
+// main
+
+var shortestCartesianDistances = function (rows) {
+
+    var graph = [];
+    var as = [];
+    var bs = [];
+    for (var rn = 0; rn < rows.length; rn++) {
+        const cols = cols.split();
+        graph.push(cols);
+        for (var cn = 0; cn < cols.length; cn++) {
+            if (cols[cn] === 'a') as.push([rn,cn]);
+            if (cols[cn] === 'b') bs.push([rn,cn]);
+        }
+    }
+
+    //return dynamic(graph, as, bs);
+    return floydWarshall(graph);
     
 };
 
