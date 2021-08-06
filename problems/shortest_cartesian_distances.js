@@ -36,32 +36,67 @@ const floydWarshall = () => {
 //
 // dynamic
 
-const eds = [
-    [[0,0], [ [[1,1], 2], [[2,2], 4] ]],
-    [[1,0], [ [[1,1], 1], [[2,2], 3] ]],
-];
-
-var shortestPath = (g, ac, bc) => {
+const dist = (ac, bc) => {
     return Math.abs( bc[0] - ac[0] ) + Math.abs( bc[1] - ac[1] );
 };
 
-const dynamic = function (graph, as, bs) {
+const sortBy = (f, coll) =>  coll.sort((a, b) => f(b) - f(a));
+
+const combinations = (as, bs) => {
+    if (as.length === 0 || bs.length === 0)
+        return [{ dist: 0, pairs: [] }];
+    if (as.length === 1)
+        return bs.reduce(cs, b => {
+            return cs.concat([{ dist: dist(as[0], b), pairs: [[as[0],b]] }]);
+        }, []);
+    if (bs.length === 1)
+        return as.reduce(cs, a => {
+            return cs.concat([{ dist: dist(a, bs[0]), pairs: [[a,bs[0]]] }]);
+        }, []);
+
+    const a = as[0];
+    var cs = [];
+    for (var i in bs) {
+        const b = bs[i];
+        const rbs = bs.slice(0,i).concat(bs.slice(i+1));
+        var rs = combinations(as.slice(1), rbs);
+        const d = dist(a,b);
+        const r = rs.map(c => {
+            return {
+                dist: c.dist + d,
+                pairs: c.pairs.concat([[a,b]])
+            };
+        });
+        cs.concat(r);
+    };
+    return cs;
+};
+
+const dynamic = function (as, bs) {
 
     var ds = [];
 
     for (var an = 0; an < as.length; an++) {
         var apaths = [];
-        for (var bn = 0; bn < bn.length; bn++) {
-            const sps = shortestPath(graph, as[an], bs[bn]);
+        for (var bn = 0; bn < bs.length; bn++) {
+            const sps = dist(as[an], bs[bn]);
             apaths.push([bs[bn], sps]);
         }
         ds.push([as[an], apaths]);
     }
 
-    // dynamic programming part
-    var rs = [];
-    //for (var )
-    // need to compute global shortests paths sums for all combinations of a's & b's
+    console.log(ds);
+    
+    // all combinations of a's & b's
+    var gds = [];
+    for (var i in as) {
+        var vbs = [];
+        var g = 0;
+        for () {
+
+        }
+        
+    }
 
     
 };
@@ -72,26 +107,30 @@ const dynamic = function (graph, as, bs) {
 
 var shortestCartesianDistances = function (rows) {
 
-    var graph = [];
+    //var graph = [];
     var as = [];
     var bs = [];
     for (var rn = 0; rn < rows.length; rn++) {
-        const cols = cols.split();
-        graph.push(cols);
+        const cols = rows[rn].split('');
+        //graph.push(cols);
         for (var cn = 0; cn < cols.length; cn++) {
             if (cols[cn] === 'a') as.push([rn,cn]);
             if (cols[cn] === 'b') bs.push([rn,cn]);
         }
     }
 
+    const rs = dynamic(as, bs);
+    console.log(rs);
+    return rs;
+    
     //return dynamic(graph, as, bs);
-    return floydWarshall(graph);
+    //return floydWarshall(graph);
     
 };
 
 const inputExpectedPairs = [
-    [["ab"], [[0, 0], [0, 1]]],
-    [["a", "b"], [[0, 0], [1, 0]]],
+    [[["ab"]], [[0, 0], [0, 1]]],
+    //[["a", "b"], [[0, 0], [1, 0]]],
 ];
 
 
