@@ -28,17 +28,57 @@
  * Given an integer, convert it to a roman numeral.
  */
 
+const ntol = [
+    [[1, "I"],
+     [5, "V"]],
+    [[10, "X"],
+     [50, "L"]],
+    [[100, "C"],
+     [500, "D"]],
+    [[1000, "M"]]
+];
 
 var intToRoman = function (num) {
-    
+
+    var nnum = num;
+    var r = "";
+    for (var i = ntol.length -1; i > -1; i--) {
+        const ps = ntol[i];
+        const [n, l] = ps[0];
+        const [fn, fl] = ps[1] || [null,null];
+        const [tn, tl] = ntol[i+1] ? ntol[i+1][0] : [null, null];
+        const m = Math.floor( nnum / n );
+        if ( m > 0 ) {
+            if ( m === 9 && tl ) {
+                r = r + l + tl;
+            }
+            else if ( m >= 5 && fl ) {
+                r = r + fl;
+                for (var j = 0; j < m - 5; j++) r = r + l;
+            }
+            else if ( m === 4 && fl ) {
+                r = r + l + fl;
+            }
+            else { // 3 or less (usually)
+                for (var j = 0; j < m; j++) r = r + l;
+            }
+            
+            nnum = nnum - ( n * m );
+        }
+    }    
+    return r;
 };
 
 const inputExpectedPairs = [
+    [[0], ""],
     [[3], "III"],
     [[4], "IV"],
+    [[5], "V"],
+    [[6], "VI"],
     [[9], "IX"],
     [[58], "LVIII"],
-    [[1994], "MCMXCIV"]
+    [[1994], "MCMXCIV"],
+    [[5994], "MMMMMCMXCIV"],
 ];
 
 
