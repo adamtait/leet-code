@@ -13,9 +13,10 @@ const p11 = require('./problems/11_container_with_most_water');
 const p12 = require('./problems/12_integer_to_roman');
 const pc = require('./problems/cafeteria');
 const pdp = require('./problems/director_of_photography');
+const p15 = require('./problems/15_three_sum');
 
+const problems = [p1, p3, p5, p6, p7, p8, pt, p9, p10, p11, p12, pc, pdp, p15];
 
-const problems = [p1, p3, p5, p6, p7, p8, pt, p9, p10, p11, p12, pc, pdp];
 
 //
 // helpers
