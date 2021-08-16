@@ -52,7 +52,6 @@ const inputExpectedPairs = [
     [['111'], 3],
 ];
 
-
 module.exports = {
     f: decodingCombinations,
     inputExpectedPairs,

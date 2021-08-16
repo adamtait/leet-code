@@ -3,9 +3,11 @@
 const areEqual = (a,b) => {
     const t = typeof a; const tb = typeof b;
     if ( t !== tb ) return false;
+    if ( a === null || b === null ) return a === b; // typeof null === 'object'
     if ( t === 'boolean' ) return a === b;
     if ( t === 'number' ) return a === b;
     if ( t === 'string' ) return a === b;
+    if ( t === 'undefined' ) return a === b;
     if ( Array.isArray(a) && ! Array.isArray(b) ) return false;
     if ( ! Array.isArray(a) && Array.isArray(b) ) return false;
     if ( Array.isArray(a) && Array.isArray(b) )
