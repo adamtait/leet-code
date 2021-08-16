@@ -137,5 +137,5 @@ const inputExpectedPairs = [
 module.exports = {
     f: shortestCartesianDistances,
     inputExpectedPairs,
-    name: '11 - container with most water'
+    name: 'shortest cartesian distances'
 };
