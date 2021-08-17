@@ -43,17 +43,58 @@ const decodingCombinations = (msg) => {
     return rcs;
 };
 
+
+//
+// 2nd attempt
+
+var memo = {};
+
+const recur = (s) => {
+
+    const useMemo = (ss) => {
+        if (memo[ss]) return memo[ss];
+        const v = recur(ss);
+        memo[ss] = v;
+        return v;
+    };
+    
+    if ( s.length <= 1 ) return 1;
+
+    var total = 0;
+    const n = Number( s.slice(0,2) );
+    if ( n <= 26 ) {
+        total = total + useMemo( s.slice(2) );
+    }
+    if ( n !== 10 && n !== 20 ) {  // skip 10, 20
+        total = total + useMemo( s.slice(1) );
+    }
+    return total;
+};
+
+const decodingCombinations2 = (msg) => {
+
+    if ( msg[0] === '0' ) return null;
+    memo = {};  // reset memo
+    return recur(msg);
+};
+
+
+//
+// tests
+
 const inputExpectedPairs = [
     [['0'], null],
     [['01'], null],
-    [['101'], null],
+    [['101'], 1],
+    [['1010'], 1],
+    [['1020'], 1],
     [['1'], 1],
     [['11'], 2],
     [['111'], 3],
 ];
 
 module.exports = {
-    f: decodingCombinations,
+    f: decodingCombinations2,
     inputExpectedPairs,
     name: '7 [medium] - decoding combinations'
 };
