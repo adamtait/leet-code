@@ -15,10 +15,10 @@ const p15 = require('./problems/leet/15_three_sum');
 const pt = require('./problems/other/permissions_tree');
 const pc = require('./problems/fb/cafeteria');
 const pdp = require('./problems/fb/director_of_photography');
-const ddc = require('./problems/daily/decoding_combinations');
+const d7 = require('./problems/daily/7_decoding_combinations');
 
 const ps = {
-    daily: [ddc],
+    daily: [d7],
     fb: [pc, pdp],
     leet: [p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15],
     other: [pt]
