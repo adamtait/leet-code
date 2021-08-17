@@ -80,6 +80,33 @@ const decodingCombinations2 = (msg) => {
 
 
 //
+// 3rd attempt
+//  dynamic programming
+//  https://www.dailycodingproblem.com/solution/7
+
+const decodingCombinations3 = (msg) => {
+    
+    if ( msg[0] === '0' ) return null;
+    var cache = [];
+    cache[msg.length] = 1;
+
+    for ( var i = msg.length - 1; i >= 0; i-- ) {
+
+        const c = msg[i];
+
+        if ( c === '0' )    cache[i] = 0;
+        else if ( i === msg.length - 1 )  cache[i] = 1;
+        else {
+            if ( Number( msg.slice(i, i+2) ) <= 26 )
+                cache[i] = cache[i+2];
+            cache[i] = cache[i] + cache[i+1];
+        }
+    }
+    return cache[0];
+};
+
+
+//
 // tests
 
 const inputExpectedPairs = [
@@ -94,7 +121,7 @@ const inputExpectedPairs = [
 ];
 
 module.exports = {
-    f: decodingCombinations2,
+    f: decodingCombinations3,
     inputExpectedPairs,
     name: '7 [medium] - decoding combinations'
 };
