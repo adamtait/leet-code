@@ -44,6 +44,26 @@ const nonAdjacentSum2 = (nums) => {
 
 
 //
+// 3rd attempt
+// in constant space
+
+const nonAdjacentSum3 = (nums) => {
+
+    if ( nums.length <= 0 ) return 0;
+
+    var cache = [0, 0];
+    for ( var i = nums.length - 1; i >= 0; i-- ) {
+        const n = nums[i];
+        const nn = cache[0];
+        const nnn = cache[1];
+        cache = [ Math.max( nn, n + nnn ), cache[0] ];
+    }
+
+    return cache[0];
+};
+
+
+//
 // tests
 
 const inputExpectedPairs = [
@@ -57,7 +77,7 @@ const inputExpectedPairs = [
 ];
 
 module.exports = {
-    f: nonAdjacentSum2,
+    f: nonAdjacentSum3,
     inputExpectedPairs,
     name: '9 [hard] - sum non-adjacent numbers'
 };
