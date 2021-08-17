@@ -5,7 +5,9 @@
  * Follow-up: Can you do this in O(N) time and constant space?
  */
 
-// thinking recursion can work, though might need to memoize or dynamic program
+//
+// 1st attempt
+// thinking recursion can work, though might need to memoize or dynamic programming
 
 const nonAdjacentSum = (nums) => {
 
@@ -22,6 +24,26 @@ const nonAdjacentSum = (nums) => {
 
 
 //
+// 2nd attempt
+// memoize or dynamic programming
+
+const nonAdjacentSum2 = (nums) => {
+
+    if ( nums.length <= 0 ) return 0;
+
+    var cache = [];
+    for (var i = nums.length - 1; i >= 0; i-- ) {
+        const n = nums[i];
+        const nn = cache[i+1] || 0;
+        const nnn = cache[i+2] || 0;
+        cache[i] = Math.max( nn, n + nnn );
+    }
+
+    return cache[0];
+};
+
+
+//
 // tests
 
 const inputExpectedPairs = [
@@ -31,10 +53,11 @@ const inputExpectedPairs = [
     [[[1, 2, 3]], 4],
     [[[2, 4, 6, 2, 5]], 13],
     [[[5, 1, 1, 5]], 10],
+    [[[5, 1, 5, 1]], 10],
 ];
 
 module.exports = {
-    f: nonAdjacentSum,
+    f: nonAdjacentSum2,
     inputExpectedPairs,
     name: '9 [hard] - sum non-adjacent numbers'
 };
