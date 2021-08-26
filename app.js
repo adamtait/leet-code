@@ -17,6 +17,7 @@ const p10  = require('./problems/leet/10_regular_expression_matching');
 const p11  = require('./problems/leet/11_container_with_most_water');
 const p12  = require('./problems/leet/12_integer_to_roman');
 const p15  = require('./problems/leet/15_three_sum');
+const p70  = require('./problems/leet/70_climbing_stairs');
 const p371 = require('./problems/leet/371_sum_two_integers');
 
 const pc   = require('./problems/fb/cafeteria');
@@ -26,7 +27,7 @@ const pdp  = require('./problems/fb/director_of_photography');
 const ps = {
     daily: [d7, d8, d9, d11],
     fb: [pc, pdp],
-    leet: [p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p371]
+    leet: [p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p70, p371]
 };
 
 const problems = Object.values(ps).reduce((a,p) => a.concat(p), []);
