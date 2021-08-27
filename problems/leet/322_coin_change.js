@@ -1,5 +1,5 @@
 
-const { newStackPrinter }  = require('../../debug');
+const { newStackPrinter }  = require('../../lib/debug');
 
 /**
  * You are given an integer array coins representing coins of

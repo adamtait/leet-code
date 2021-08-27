@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+    echo "Error: first argument is required. It's the problem group/type."
+    exit 0
+fi
+
+if [[ -z $2 ]]; then
+    echo "Error: second argument is required. It's the problem name (see app.js)."
+    exit 0
+fi
+
+node -e "require(\"./app\").test(\"${1}\", \"${2}\")"
