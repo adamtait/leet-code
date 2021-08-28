@@ -1,6 +1,8 @@
 
 const runner = require('./lib/runner');
 
+const c15  = require('./problems/cracking/1_5_one_away');
+
 const d7   = require('./problems/daily/7_decoding_combinations');
 const d8   = require('./problems/daily/8_unival_subtrees');
 const d9   = require('./problems/daily/9_sum_non_adjacent');
@@ -20,7 +22,7 @@ const p12  = require('./problems/leet/12_integer_to_roman');
 const p15  = require('./problems/leet/15_three_sum');
 const p57  = require('./problems/leet/57_insert_interval');
 const p70  = require('./problems/leet/70_climbing_stairs');
-const p73  = require('./problems/leet/73_set_matrix_zeroes');
+const p73  = require('./problems/leet/73_set_matrix_zeros');
 const p133 = require('./problems/leet/133_clone_graph');
 const p206 = require('./problems/leet/206_reverse_linked_list');
 const p322 = require('./problems/leet/322_coin_change');
@@ -31,6 +33,7 @@ const pdp  = require('./problems/fb/director_of_photography');
 
 
 const problemsByType = {
+    cracking: { c15 },
     daily: {d7, d8, d9, d11},
     fb: {pc, pdp},
     leet: {p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p57,
