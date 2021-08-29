@@ -3,6 +3,7 @@ const runner = require('./lib/runner');
 
 const c15  = require('./problems/cracking/1_5_one_away');
 
+const d1_1 = require('./problems/daily/1_1_product_of_all_other_elements');
 const d7   = require('./problems/daily/7_decoding_combinations');
 const d8   = require('./problems/daily/8_unival_subtrees');
 const d9   = require('./problems/daily/9_sum_non_adjacent');
@@ -34,7 +35,7 @@ const pdp  = require('./problems/fb/director_of_photography');
 
 const problemsByType = {
     cracking: { c15 },
-    daily: {d7, d8, d9, d11},
+    daily: {d7, d8, d9, d1_1, d11},
     fb: {pc, pdp},
     leet: {p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p57,
            p70, p73, p133, p206, p322, p371}
