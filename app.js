@@ -51,12 +51,37 @@ const problems = Object
       .values(problemsByType)
       .reduce((a,p) => a.concat( Object.values(p) ), []);
 
+
+//
+// test aggregators
+
 const testsAll = () => runner.testsAll(problems);
 const testsFailed = () => runner.testsFailed(problems);
-const test = (t, pk) => {
-    const p = problemsByType[t][pk];
+
+
+//
+// test
+
+const validateProblemSet = (s) => {
+    if ( Object.keys(problemsByType).indexOf(s) < 0 )
+        throw 'Problem set/type (' + s + ') is not valid';
+};
+
+const validateProblemKey = (ps, pks) => {
+    if ( Object.keys(problemsByType[ps]).indexOf(pks) < 0 )
+        throw 'Problem keys (' + pks + ') is not valid';
+};
+
+const test = (ps, pks) => {
+    validateProblemSet(ps);
+    validateProblemKey(ps, pks);
+    const p = problemsByType[ps][pks];
     return runner.testsAll( [p] );
-}
+};
+
+
+//
+// interface
 
 module.exports = {
     problems,
