@@ -30,6 +30,7 @@ const p15   = require('./problems/leet/15_three_sum');
 const p57   = require('./problems/leet/57_insert_interval');
 const p70   = require('./problems/leet/70_climbing_stairs');
 const p73   = require('./problems/leet/73_set_matrix_zeros');
+const p121  = require('./problems/leet/121_buy_sell_stock');
 const p133  = require('./problems/leet/133_clone_graph');
 const p206  = require('./problems/leet/206_reverse_linked_list');
 const p322  = require('./problems/leet/322_coin_change');
@@ -48,7 +49,7 @@ const problemsByType = {
              d15_4 },
     fb: {pc, pdp},
     leet: {p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p57,
-           p70, p73, p133, p206, p322, p371}
+           p70, p73, p121, p133, p206, p322, p371}
 };
 
 const problems = Object

@@ -35,19 +35,56 @@
 //   + for each
 //     + find highest price in rest of prices
 //     + take difference. store this value if greater than max so far
-// O(n^2)
+// O( n^2 )
 
 var maxProfit = function (prices) {
 
-    var maxDiff = -1;
+    var maxDiff = 0;
     for ( var i = 0; i < prices.length -1; i++ ) {
-        var max = -1;
+        var max = 0;
         for ( var j = i + 1; j < prices.length; j++ ) {
             max = Math.max(max, prices[j]);
         }
         const diff = max - prices[i];
         maxDiff = Math.max(diff, maxDiff);
     }
+    return maxDiff;
+};
+
+
+// 4th possible solution
+// I think that the 2nd possible solution would have a lower time
+// complexity
+// O( n )
+
+
+var maxProfit = function (prices) {
+
+    var minAt = [];
+    var maxFrom = [];
+    
+    for ( var i = 0; i < prices.length -1; i++ ) {
+        
+        const mini = minAt[ minAt.length -1 ];
+        if ( mini === undefined || prices[mini] > prices[i] )
+            minAt.push(i);
+        else minAt.push(mini);
+
+        const mi = prices.length - i - 1;
+        const maxi = maxFrom[ 0 ];
+        if ( maxi === undefined || prices[maxi] < prices[mi] )
+            maxFrom.unshift(mi);
+        else maxFrom.unshift(maxi);
+    }
+
+    var maxDiff = 0;
+    var mini = minAt.pop(), maxi = maxFrom.pop();
+    while ( mini < maxi ) {
+        maxDiff = Math.max( maxDiff, prices[maxi] - prices[mini] );
+        mini = minAt.pop();
+        maxi = maxFrom.pop();
+    }
+    
     return maxDiff;
 };
 
@@ -63,5 +100,5 @@ const inputExpectedPairs = [
 module.exports = {
     f: maxProfit,
     inputExpectedPairs,
-    name: ''
+    name: '121 - best time to buy and sell stock'
 };
