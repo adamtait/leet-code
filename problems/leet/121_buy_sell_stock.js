@@ -89,6 +89,25 @@ var maxProfit = function (prices) {
 };
 
 
+// LeetCode solution
+// keep track of current min
+// look for max diff
+// O(n)
+
+var maxProfit = function (prices) {
+
+    var min = 9999999;
+    var maxDiff = 0;
+    for ( var i = 0; i < prices.length; i++ ) {
+        const p = prices[i];
+        if ( p < min ) min = p;
+        if ( p - min > maxDiff )
+            maxDiff = p - min;
+    }
+    return maxDiff;
+};
+
+
 //
 // tests
 
