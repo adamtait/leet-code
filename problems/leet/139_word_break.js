@@ -119,11 +119,14 @@ var wordBreak3 = function (s, wordDict) {
     // build possibilities from end
     var possibles = [];
     for ( var i = s.length -1; i >= 0; i-- ) {
-        if ( s.slice(i) )
+        if ( s.slice(i) ) {}
     }
     return possibles[0];
 };
 
+
+//
+// test
 
 const inputExpectedPairs = [
     [["leetcode", ["leet","code"]], true],

@@ -2,6 +2,7 @@
 const runner = require('./lib/runner');
 
 const c15  = require('./problems/cracking/1_5_one_away');
+const c86  = require('./problems/cracking/8_6_towers_of_hanoi');
 
 const d1_1  = require('./problems/daily/1_1_product_of_all_other_elements');
 const d1_2  = require('./problems/daily/1_2_find_unsorted');
@@ -46,7 +47,7 @@ const pdp   = require('./problems/fb/director_of_photography');
 // problems
 
 const problemsByType = {
-    cracking: { c15 },
+    cracking: { c15, c86 },
     daily: { d1_1, d1_2, d1_3, d2_1, d3_2, d4_3, d7, d8, d9, d11,
              d15_4 },
     fb: {pc, pdp},
