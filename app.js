@@ -27,6 +27,7 @@ const p10   = require('./problems/leet/10_regular_expression_matching');
 const p11   = require('./problems/leet/11_container_with_most_water');
 const p12   = require('./problems/leet/12_integer_to_roman');
 const p15   = require('./problems/leet/15_three_sum');
+const p54   = require('./problems/leet/54_spiral_matrix');
 const p57   = require('./problems/leet/57_insert_interval');
 const p70   = require('./problems/leet/70_climbing_stairs');
 const p73   = require('./problems/leet/73_set_matrix_zeros');
@@ -48,8 +49,8 @@ const problemsByType = {
     daily: { d1_1, d1_2, d1_3, d2_1, d3_2, d4_3, d7, d8, d9, d11,
              d15_4 },
     fb: {pc, pdp},
-    leet: {p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p57,
-           p70, p73, p121, p133, p206, p322, p371}
+    leet: {p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p54,
+           p57, p70, p73, p121, p133, p206, p322, p371}
 };
 
 const problems = Object

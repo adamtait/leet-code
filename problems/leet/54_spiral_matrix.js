@@ -12,6 +12,8 @@
 
 var spiralOrder = function (matrix) {
 
+    if ( ! matrix || matrix.length < 1 ) return [];
+    
     // var allStates = ['right', 'down', 'left', 'up'];
     var state = 0;
     var boundaries = [matrix[0].length -1, matrix.length -1,
