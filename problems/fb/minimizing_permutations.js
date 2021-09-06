@@ -121,12 +121,19 @@ const combineSubarrays = (a,b) => {
     newArrays = [ a.concat( b ) ];
         
   else if ( withinOne( a[0], b[0] )) {  // reverse a
-    newArrays = [ a.reverse().concat( b ) ];
+    a.reverse();
+    newArrays = [ a.concat( b ) ];
     reversals = 1;
   }
-  else if ( withinOne( a[0], b[b.length-1] )) {  // reverse b
-    newArrays = [ a.concat( b.reverse() ) ];
+  else if ( withinOne( a[a.length-1], b[b.length-1] )) {  // reverse b
+    b.reverse();
+    newArrays = [ a.concat( b ) ];
     reversals = 1;
+  }
+  else if ( withinOne( a[0], b[b.length-1] )) {  // reverse both!
+    a.reverse(); b.reverse();
+    newArrays = [ a.concat( b ) ];
+    reversals = 2;
   }
   return { reversals, newArrays };
 };
@@ -135,22 +142,20 @@ const reversals = (sarrs) => {
   
   //console.log('reversals: ' + JSON.stringify(sarrs) );
   
-  var lmc = 1;
   var rs = 0;
   var i = 0;
   //var nrs = 999999;   // do some memoization or dynamic programming to find optimal solution?
-  while ( sarrs.length > 1 && lmc > 0 ) {
+  while ( sarrs.length > 1 ) {
     var { reversals, newArrays } = combineSubarrays( sarrs[i], sarrs[i+1] );
     rs += reversals;
     sarrs = replace(i, i+1, newArrays, sarrs);
     if ( newArrays.length > 1 )  // => no combining possible with sarrs[i]
       i = i+1 % sarrs.length;
     //if (reversals > 0) console.log( JSON.stringify(sarrs) );
-    lmc--;
   }
   
   //console.log('fin: ' + JSON.stringify(sarrs) );
-  if ( sarrs[0] !== 1 ) rs++;
+  if ( sarrs[0][0] !== 1 ) rs++;
   return rs;
 }
 
@@ -167,9 +172,6 @@ function minOperations (arr) {
  
   return reversals(sas);
 }
-
-
-
 
 
 
@@ -217,3 +219,11 @@ var output_2 = minOperations(arr_2);
 check(expected_2, output_2);
 
 // Add your own test cases here
+
+
+
+var n_3 = 5;
+var arr_3 = [4, 3, 5, 1, 2];
+var expected_3 = 4;
+var output_3 = minOperations(arr_3);
+check(expected_3, output_3);
