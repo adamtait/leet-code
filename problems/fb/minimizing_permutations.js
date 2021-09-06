@@ -139,10 +139,28 @@ const combineSubarrays = (a,b) => {
 };
 
 const reversals = (sarrs) => {
-  
   //console.log('reversals: ' + JSON.stringify(sarrs) );
-  
+
   var rs = 0;
+  
+  // assumption: at least 1 of sarrs has > 1 value
+  if ( sarrs.filter(sa => sa.length > 1).length < 1 ) {
+    // assumption broken => find/make a first contiguous subarray
+    const fv = sarrs[0][0];
+    for ( var i = sarrs.length -1; i > 1; i-- ) {
+      if ( withinOne( fv, sarrs[i][0]) ) {
+        var tsarrs = sarrs.slice(1,i+1);
+        tsarrs.reverse();
+        rs++;
+        sarrs = replace(1,i, tsarrs, sarrs);  // reverse coll of subarrays
+        sarrs = replace(0,1, [[fv, sarrs[1][0]]], sarrs); // merge first 2 subarrays
+        //console.log( JSON.stringify(sarrs) );
+        break;
+      }
+    }
+  }
+
+  // combine subarrays through reversals
   var i = 0;
   //var nrs = 999999;   // do some memoization or dynamic programming to find optimal solution?
   while ( sarrs.length > 1 ) {
@@ -227,3 +245,12 @@ var arr_3 = [4, 3, 5, 1, 2];
 var expected_3 = 4;
 var output_3 = minOperations(arr_3);
 check(expected_3, output_3);
+
+
+var n_4 = 4;
+var arr_4 = [2, 4, 1, 3];
+var expected_4 = 3;
+var output_4 = minOperations(arr_4);
+check(expected_4, output_4);
+// 2,4,1,3 => 4,2,1,3 => 4,1,2,3 => 4,3,2,1 => 1,2,3,4 (4)
+// 2,4,1,3 => 2,3,1,4 => 3,2,1,4 => 1,2,3,4 (3)
