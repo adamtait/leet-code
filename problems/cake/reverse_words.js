@@ -130,5 +130,5 @@ const inputExpectedPairs = [
 module.exports = {
     f: reverseWords,
     inputExpectedPairs,
-    name: ''
+    name: 'reverse words in place'
 };
