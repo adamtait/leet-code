@@ -1,4 +1,6 @@
 /**
+ * url: https://www.interviewcake.com/question/javascript/reverse-words
+ *
  * You're working on a secret team solving coded transmissions.
  *
  * Your team is scrambling to decipher a recent message, worried it's
@@ -59,6 +61,55 @@ var reverseWords = (carr) => {
     while ( cw.length > 0 )
         carr.push( cw.shift() );
     for ( var i = 0; i < l; i++ ) carr.shift();
+    return carr;
+};
+
+
+/**
+ solution 3:
+ + accepted solution pointed out that solution 2 is actually
+   + O(n^2) time complexity
+     + b/c while loop within for loop iterates over same chars again
+       + though, I think closer to O(2*n + n)
+   + O(2n) space complexity = O(n)
+
+     + personally, I think O(n) is good since we'll always need to
+       store the entire array
+       + but, we can do better
+ + accepted solution is
+   + reverse entire array
+     + thus reversing the order of the words
+     + O(n)
+   + iterate through and reverse each word
+     + O(~n)
+ */
+
+const isNull = (v) => v === null || v === undefined;
+
+var reverse = (carr, i = 0, j = null) => {
+    const l = carr.length;
+    j = isNull(j) ? l-1 : j;
+    while ( i < j ) {
+        const c = carr[j];
+        carr[j] = carr[i];
+        carr[i] = c;
+        i++; j--;
+    }
+    return carr;
+};
+
+var reverseWords = (carr) => {
+    const l = carr.length;
+    carr = reverse(carr);
+    var i = 0, j = 0;
+    while ( i < l ) {
+        const jc = carr[j];
+        if ( jc === ' ' || j === l ) {
+            carr = reverse(carr, i, j-1); // => swap all chars (i,j]
+            i = j + 1; // jump i ahead to start of next word
+        }
+        j++;
+    }
     return carr;
 };
 
