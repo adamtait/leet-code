@@ -1,6 +1,8 @@
 
 const runner = require('./lib/runner');
 
+const k1   = require('./problems/cake/merging_ranges');
+
 const c15  = require('./problems/cracking/1_5_one_away');
 const c86  = require('./problems/cracking/8_6_towers_of_hanoi');
 
@@ -48,6 +50,7 @@ const pdp   = require('./problems/fb/director_of_photography');
 // problems
 
 const problemsByType = {
+    cake: { k1 },
     cracking: { c15, c86 },
     daily: { d1_1, d1_2, d1_3, d2_1, d3_2, d4_3, d7, d8, d9, d11,
              d15_4 },
