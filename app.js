@@ -6,6 +6,7 @@ const k2   = require('./problems/cake/reverse_string_in_place');
 const k3   = require('./problems/cake/reverse_words');
 const k4   = require('./problems/cake/merge_sorted_arrays');
 const k5   = require('./problems/cake/cafe_order_checker');
+const k6   = require('./problems/cake/inflight_entertainment');
 
 const c15  = require('./problems/cracking/1_5_one_away');
 const c86  = require('./problems/cracking/8_6_towers_of_hanoi');
@@ -54,7 +55,7 @@ const pdp   = require('./problems/fb/director_of_photography');
 // problems
 
 const problemsByType = {
-    cake: { k1, k2, k3, k4, k5 },
+    cake: { k1, k2, k3, k4, k5, k6 },
     cracking: { c15, c86 },
     daily: { d1_1, d1_2, d1_3, d2_1, d3_2, d4_3, d7, d8, d9, d11,
              d15_4 },
