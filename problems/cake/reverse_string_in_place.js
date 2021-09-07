@@ -28,5 +28,5 @@ const inputExpectedPairs = [
 module.exports = {
     f: reverse,
     inputExpectedPairs,
-    name: 'merging ranges'
+    name: 'reverse a string in place'
 };
