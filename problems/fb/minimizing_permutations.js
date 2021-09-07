@@ -196,6 +196,92 @@ function minOperations (arr) {
 
 
 
+/**
+ Thoughts:
+ + reading https://www.teamblind.com/post/Who-can-leetcode-hard-q1vFGBam
+ + better solution would be to graph possible permutations
+   + starting from ordered array 1..N
+   + BFS to first permutation === given arr
+     + guaranteed to be minimal since any further solution would be greater distance
+ + Dijkstra's (variant of BFS) (or A*) is more useful on weighted graphs
+*/
+
+const range = (n) => {
+  var a = [];
+  for ( var i = 1; i <= n; i++ ) a.push(i);
+  return a;
+};
+
+
+// reversal examples
+
+// 1,2
+// 2,1
+
+// 1,2,3
+// 2,1,3 + 1,3,2 + 3,2,1
+
+const reverseSubarray = (i, len, arr) => {
+  const b = arr.slice(0,i);
+  var m = arr.slice(i, i+len); m.reverse();
+  const e = arr.slice(i+len);
+  return b.concat(m).concat(e);
+};
+
+const allReversalPerms = (arr) => {
+  const n = arr.length;
+  var ras = [];
+  for ( var i = 0; i < n; i++ ) {  // index
+      for ( var j = 2; j < n - i + 1; j++ ) {  // size
+        const p = reverseSubarray(i, j, arr);
+        ras.push(p);
+      }
+  }
+  return ras;
+};
+
+const arrayEqual = (a,b) => {
+  if ( a.length !== b.length ) return false;
+  for ( var i = 0; i < a.length; i++ ) {
+    if ( a[i] !== b[i] ) return false;
+  }
+  return true;
+};
+
+const containsPerm = (goal, perms) => {
+  for ( var i = 0; i < perms.length; i++ ) {
+    if ( arrayEqual(goal, perms[i]) ) return true;
+  }
+  return false;
+};
+
+function minOperations (arr) {
+  
+  const n = arr.length;
+  const root = range(n);
+  
+  var depth = 0;
+  var lastDepthPerms = [root];
+  
+  while ( ! containsPerm( arr, lastDepthPerms ) ) {
+    var npsa = [];
+    for ( var i = 0; i < lastDepthPerms.length; i++ ) {
+      const p = lastDepthPerms[i];
+      const nps = allReversalPerms(p);
+      npsa = npsa.concat( nps );
+      if ( containsPerm(arr, nps) ) break;
+    }
+    lastDepthPerms = npsa;
+    depth++;
+  }
+  return depth;
+}
+
+
+
+
+
+
 // These are the tests we use to determine if the solution is correct.
 // You can add your own at the bottom.
 function printInteger(n) {
@@ -224,6 +310,7 @@ function check(expected, output) {
   test_case_number++;
 }
 
+
 var n_1 = 5;
 var arr_1 = [1, 2, 5, 4, 3];
 var expected_1 = 1;
@@ -235,6 +322,7 @@ var arr_2 = [3, 1, 2];
 var expected_2 = 2;
 var output_2 = minOperations(arr_2);
 check(expected_2, output_2);
+// 3 - 1 - 2 => 3 - 2 - 1 => 1 - 2 - 3   (2)
 
 // Add your own test cases here
 
@@ -242,11 +330,13 @@ check(expected_2, output_2);
 
 var n_3 = 5;
 var arr_3 = [4, 3, 5, 1, 2];
-var expected_3 = 4;
+var expected_3 = 2;
 var output_3 = minOperations(arr_3);
 check(expected_3, output_3);
+// 4,3,5,1,2 => 3,4,5,1,2 => 5,4,3,1,2 => 5,4,3,2,1 => 1,2,3,4,5 (4)
+// 4,3,5,1,2 => 4,3,2,1,5 => 1,2,3,4,5 (2)
 
-
+// will freeze 2nd algorithm. no asc/desc subarrays to reverse
 var n_4 = 4;
 var arr_4 = [2, 4, 1, 3];
 var expected_4 = 3;
