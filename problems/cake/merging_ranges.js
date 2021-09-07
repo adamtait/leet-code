@@ -18,6 +18,7 @@ var mapToPair = ({ startTime, endTime }) => {
     return [startTime, endTime];
 };
 
+var isNull = (v) => v === null || v === undefined;
 
 var mergeRanges = (ranges) => {
 
@@ -34,13 +35,12 @@ var mergeRanges = (ranges) => {
     var mrs = [];
     var i = 0;
     while ( i < ts.length ) {
-        while ( i < ts.length && ts[i] !== 'start' ) i++;
+        while ( i < ts.length && ts[i] !== 'start' )
+            i++;
         var startTime = i; i++;
-        while ( i < ts.length
-                && ( ts[i] !== 'end'
-                     || ts[i+1] === true ))
-                i++;
-        var endTime = i; i++;
+        while ( i < ts.length && ! isNull(ts[i]) )
+            i++;
+        var endTime = i-1; i++;
         mrs.push({ startTime, endTime });
     }
     
@@ -60,7 +60,10 @@ const wrap = (arrs) => {
 
 const inputExpectedPairs = [
     [[[[2,3],[6,9]]], [[2,3],[6,9]]],
-    [[[[0,1],[3,5],[4,8],[10,12],[9,10]]], [[0,1],[3,8],[9,12]]]
+    [[[[0,1],[3,5],[4,8],[10,12],[9,10]]], [[0,1],[3,8],[9,12]]],
+    [[[[1,2],[2,3]]], [[1,3]]],
+    [[[[1,5],[2,3]]], [[1,5]]],
+    [[[[1,10],[2,6],[3,5],[7,9]]], [[1,10]]]
 ];
 
 module.exports = {
