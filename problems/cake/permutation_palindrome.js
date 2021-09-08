@@ -39,6 +39,29 @@ var pp = (s) => {
 };
 
 
+/**
+ solution 2:
+ + summing may result in integer overflow
+   + if occurances are higher than integer
+   + ideas:
+     + could avoid by knocking sum of occurances back down to 0 when it
+     reaches 2
+     + use a Set instead of {}
+*/
+
+
+var pp = (s) => {
+    var seen = new Set();
+
+    for ( var i = 0; i < s.length; i++ ) {
+        const c = s[i];
+        if ( seen.has(c) ) seen.delete(c);
+        else seen.add(c);
+    }
+
+    return seen.size <= 1;
+};
+
 
 //
 // test
