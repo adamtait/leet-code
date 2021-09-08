@@ -27,7 +27,7 @@
 
 */
 
-var pairToEvent = ([birth, death]) => [[birth, true], [death, false]];
+var pairToEvent = ([birth, death]) => [[birth, true], [death+1, false]];
 
 var year = (pairs) => {
     const ps = pairs
