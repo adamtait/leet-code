@@ -24,6 +24,7 @@ const d9    = require('./problems/daily/9_sum_non_adjacent');
 const d11   = require('./problems/daily/11_autocomplete');
 const d15_4 = require('./problems/daily/15_4_find_in_rotated_array');
 const d20   = require('./problems/daily/20_linked_list_intersection');
+const d22   = require('./problems/daily/22_word_matching');
 
 const p1    = require('./problems/leet/1_two_sum');
 //const p2    = require('./problems/leet/2_add_two_numbers');
@@ -60,7 +61,7 @@ const problemsByType = {
     cake: { k1, k2, k3, k4, k5, k6, k7 },
     cracking: { c15, c86 },
     daily: { d1_1, d1_2, d1_3, d2_1, d3_2, d4_3, d7, d8, d9, d11,
-             d15_4, d20 },
+             d15_4, d20, d22 },
     fb: {pc, pdp},
     leet: {p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p54,
            p57, p70, p73, p121, p133, p139, p206, p271, p322, p371}
