@@ -137,6 +137,91 @@ var cherry = (g) => {
 };
 
 
+/*
+ attempt 2
+ + any A*-like search with a heuristic is likely to be sub optimal
+   + unless it can predict some route around all the walls...
+ + back to brute-force-like solution
+ + dynamic programming?
+   + build 2x max paths
+     + cumulative
+     + do we even need to start from either end? can just take two
+     paths from 0,0?
+       + paths are mutually exclusive. cherries cannot be selected twice.
+       + so, we need some count of unique cherries
+       + some cherries cannot be accessed, in case they're enclosed by walls
+       + could run the algorithm twice, after removing the claimed
+        cherries from the 1st path
+   + not sure that dynamic programming in a matrix is the right approach
+     + need to be able to recover the locations of the cherries claimed
+     + I think we can do DP and also recover the cherries
+ + time:  O( 2 * n*n )
+ + space: O( 3 * n*n )
+*/
+
+var initSquareMatrix = (n, v = null) => {
+    var m = [];
+    for ( var i = 0; i < n; i++ ) {
+        m[i] = [];
+        for ( var j = 0; j < n; j++ )
+            m[i][j] = v;
+    }
+    return m;
+};
+
+var pathMaxCherries = (g, taken) => {
+
+    const n = g.length;
+    taken = taken ? taken : initSquareMatrix(n);
+    var dpm = initSquareMatrix(n, []);
+    
+    for ( var i = 0; i < n; i++ ) {
+        for ( var j = 0; j < n; j++ ) {
+
+            const up = i === 0 ? [] : dpm[i-1][j];
+            const upLen = up.filter(p => p !== null).length;
+            const upHasWall = up.some(p => p === null);
+            const left = j === 0 ? [] : dpm[i][j-1];
+            const leftLen = left.filter(p => p !== null).length;
+            const leftHasWall = left.some(p => p === null);
+
+            var cur = [null];
+            if ( g[i][j] !== -1 ) cur = [];
+            if ( g[i][j] === 1 && ! taken[i][j] )
+                cur = [[i,j]];
+
+            if ( upHasWall && leftHasWall )
+                dpm[i][j] = [null];  // unreachable node
+            else if ( upHasWall )
+                dpm[i][j] = [ ...left, ...cur ];
+            else if ( leftHasWall )
+                dpm[i][j] = [ ...up, ...cur ];
+            else
+                dpm[i][j] = upLen > leftLen ? [ ...up, ...cur ] : [ ...left, ...cur ];
+        }
+    }
+    return dpm[n-1][n-1].filter(p => p !== null);
+};
+
+var pairsToMatrix = (pairs, n) => {
+    var m = initSquareMatrix(n);
+    for ( const p of pairs ) {
+        if ( p === null ) continue;
+        const [i,j] = p;
+        m[i][j] = true;
+    }
+    return m;
+};
+
+var cherry = (g) => {
+    const firstCherries = pathMaxCherries(g);
+    //console.log(firstCherries);
+    const taken = pairsToMatrix(firstCherries, g.length);
+    const returnCherries = pathMaxCherries(g, taken);
+    //console.log(returnCherries);
+    return firstCherries.length + returnCherries.length;
+};
+
 
 //
 // tests
