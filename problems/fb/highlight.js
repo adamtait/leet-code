@@ -58,6 +58,8 @@ var highlight = (ptrn, s) => {
 /*
  solution 2
  + use String.split() to handle getting index
+ + time:  O(n)
+ + space: O(n)
 */
 
 var highlight = (ptrn, s) => {
