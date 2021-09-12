@@ -53,6 +53,7 @@ const p371  = require('./problems/leet/371_sum_two_integers');
 
 const pc    = require('./problems/fb/cafeteria');
 const pdp   = require('./problems/fb/director_of_photography');
+const fh    = require('./problems/fb/highlight');
 
 
 //
@@ -63,7 +64,7 @@ const problemsByType = {
     cracking: { c15, c86 },
     daily: { d1_1, d1_2, d1_3, d2_1, d3_2, d4_3, d7, d8, d9, d11,
              d15_4, d19, d20, d22 },
-    fb: {pc, pdp},
+    fb: { fh, pc, pdp },
     leet: {p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p54,
            p57, p70, p73, p121, p133, p139, p206, p271, p322, p371}
 };
