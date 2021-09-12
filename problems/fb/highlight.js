@@ -55,6 +55,23 @@ var highlight = (ptrn, s) => {
 };
 
 
+/*
+ solution 2
+ + use String.split() to handle getting index
+*/
+
+var highlight = (ptrn, s) => {
+
+    if ( ptrn.length === 0 ) return s;
+
+    var ss = s.split(ptrn);
+    ss = ss.reduce((a, ibs) => [ ...a, ibs, '<b>', ptrn, '</b>' ], []);
+    ss = ss.slice(0, ss.length - 3);
+    
+    return ss.join('');
+};
+
+
 //
 // tests
 
