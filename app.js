@@ -27,6 +27,9 @@ const d19   = require('./problems/daily/19_colored_houses');
 const d20   = require('./problems/daily/20_linked_list_intersection');
 const d22   = require('./problems/daily/22_word_matching');
 
+const pc    = require('./problems/fb/cafeteria');
+const pdp   = require('./problems/fb/director_of_photography');
+
 const p1    = require('./problems/leet/1_two_sum');
 //const p2    = require('./problems/leet/2_add_two_numbers');
 const p3    = require('./problems/leet/3_longest_substring');
@@ -51,9 +54,8 @@ const p271  = require('./problems/leet/271_encode_decode_strings');
 const p322  = require('./problems/leet/322_coin_change');
 const p371  = require('./problems/leet/371_sum_two_integers');
 
-const pc    = require('./problems/fb/cafeteria');
-const pdp   = require('./problems/fb/director_of_photography');
-const fh    = require('./problems/fb/highlight');
+const oh    = require('./problems/own/highlight');
+const obs   = require('./problems/own/binary_search');
 
 
 //
@@ -64,9 +66,10 @@ const problemsByType = {
     cracking: { c15, c86 },
     daily: { d1_1, d1_2, d1_3, d2_1, d3_2, d4_3, d7, d8, d9, d11,
              d15_4, d19, d20, d22 },
-    fb: { fh, pc, pdp },
+    fb: { pc, pdp },
     leet: {p1, p3, p5, p6, p7, p8, p9, p10, p11, p12, p15, p54,
-           p57, p70, p73, p121, p133, p139, p206, p271, p322, p371}
+           p57, p70, p73, p121, p133, p139, p206, p271, p322, p371},
+    own: { oh, obs }
 };
 
 const problems = Object
