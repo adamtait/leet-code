@@ -80,6 +80,36 @@ var wrap = (matrix) => {
 };
 
 
+/*
++ dp, no backtracking
++ memo min costs for each color from previous row
++ when color is same, unallowed, so could set to
+Number.POSITIVE_INFINITY or just skip
++ time:  O(n*m)
++ space: O(m)
+ */
+
+var coloring = (matrix) => {
+
+    var lastMinCost = 0, lastMinIndex = -1;
+    for ( var i = 0; i < matrix.length; i++ ) {
+        var minCost = Number.POSITIVE_INFINITY, minIndex = -1;
+        for ( var j = 0; j < matrix[0].length; j++ ) {
+
+            if ( lastMinIndex === j ) continue;
+            const cost = matrix[i][j];
+            if ( lastMinCost + cost < minCost  ) {
+                minCost = lastMinCost + cost;
+                minIndex = j;
+            }
+        }
+        lastMinCost = minCost;
+        lastMinIndex = minIndex;
+    }
+    return lastMinCost;
+};
+
+
 //
 // test
 
