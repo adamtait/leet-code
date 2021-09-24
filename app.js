@@ -8,6 +8,7 @@ const k4   = require('./problems/cake/merge_sorted_arrays');
 const k5   = require('./problems/cake/cafe_order_checker');
 const k6   = require('./problems/cake/inflight_entertainment');
 const k7   = require('./problems/cake/permutation_palindrome');
+const k8   = require('./problems/cake/word_cloud');
 
 const c15  = require('./problems/cracking/1_5_one_away');
 const c86  = require('./problems/cracking/8_6_towers_of_hanoi');
@@ -65,7 +66,7 @@ const obs   = require('./problems/own/binary_search');
 // problems
 
 const problemsByType = {
-    cake: { k1, k2, k3, k4, k5, k6, k7 },
+    cake: { k1, k2, k3, k4, k5, k6, k7, k8 },
     cracking: { c15, c86 },
     daily: { d1_1, d1_2, d1_3, d2_1, d3_2, d4_3, d7, d8, d9, d11,
              d15_4, d19, d20, d22 },

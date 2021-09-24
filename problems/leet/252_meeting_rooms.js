@@ -62,7 +62,7 @@ const inputExpectedPairs = [
 ];
 
 module.exports = {
-    f: countDistinctTriangles,
+    f: canAttendMeetings,
     inputExpectedPairs,
     name: '252 [easy] - meetings rooms'
 };
